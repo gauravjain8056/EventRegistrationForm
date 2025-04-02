@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+</head>
+<body>
+    <div class="form-container">
+        <h1>Event Registration</h1>
+
+        <form id="registrationForm">
+            <!-- Step 1: Participant Details -->
+            <div class="form-step" id="step1">
+                <h2>Participant Details</h2>
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+                
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" required>
+                
+                <button type="button" onclick="nextStep(2)">Next</button>
+            </div>
+
+            <!-- Step 2: Event Selection -->
+            <div class="form-step" id="step2">
+                <h2>Event Selection</h2>
+                <label for="event">Choose Event</label>
+                <select id="event" name="event" onchange="updatePricing()">
+                    <option value="conference">Conference - $100</option>
+                    <option value="workshop">Workshop - $50</option>
+                    <option value="webinar">Webinar - Free</option>
+                </select>
+
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price" readonly value="$100">
+
+                <button type="button" onclick="nextStep(3)">Next</button>
+                <button type="button" onclick="previousStep(1)">Back</button>
+            </div>
+
+            <!-- Step 3: Confirmation -->
+            <div class="form-step" id="step3">
+                <h2>Confirmation</h2>
+                <p>Please confirm your registration details:</p>
+                <div id="confirmationDetails"></div>
+                
+                <button type="button" onclick="generateQRCode()">Generate QR Code</button>
+                <button type="submit">Submit Registration</button>
+                <button type="button" onclick="previousStep(2)">Back</button>
+            </div>
+        </form>
+        
+        <div id="qrCodeContainer" class="qr-container">
+            <!-- QR Code will appear here -->
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
